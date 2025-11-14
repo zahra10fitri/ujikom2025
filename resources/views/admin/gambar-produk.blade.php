@@ -1,44 +1,52 @@
 @extends('admin.template')
 
 @section('content')
-<h3>Daftar Gambar Produk</h3>
 
-<a href="{{ route('admin.gambar-produk.create') }}" class="btn btn-primary mb-3">Tambah Gambar</a>
+<h3 class="mb-3">Daftar Gambar Produk</h3>
 
-<table class="table table-bordered">
-    <thead>
+<a href="{{ route('admin.gambar-produk.create') }}" class="btn btn-primary mb-3">
+    Tambah Gambar
+</a>
+
+<table class="table table-bordered align-middle">
+    <thead class="table-light">
         <tr>
-            <th>ID</th>
+            <th>ID Gambar</th>
             <th>Produk</th>
-            <th>Nama Gambar</th>
+            <th>Nama Gambar (dari produk)</th>
             <th>Aksi</th>
         </tr>
     </thead>
+
     <tbody>
         @foreach ($data as $g)
         <tr>
-            <td>{{ $g->id }}</td>
+            <!-- ID GAMBAR -->
+            <td>{{ $g->id_gambar }}</td>
 
+            <!-- PRODUK -->
             <td>{{ $g->produk->nama_produk ?? '-' }}</td>
 
+            <!-- NAMA GAMBAR (ngambil dari tabel produk) -->
             <td>
-                <img src="/uploads/gambar_produk/{{ $g->nama_gambar }}" width="100">
+                {{ $g->produk->gambar ?? 'Belum ada gambar' }}
             </td>
 
+            <!-- AKSI -->
             <td>
-                <a href="{{ route('admin.gambar.edit', $g->id) }}" class="btn btn-warning btn-sm">
+                <a href="{{ route('admin.gambar-produk.edit', $g->id_gambar) }}" class="btn btn-warning btn-sm">
                     Edit
                 </a>
 
-                <a href="{{ route('admin.gambar.delete', $g->id) }}"
+                <a href="{{ route('admin.gambar-produk.delete', $g->id_gambar) }}" 
                    class="btn btn-danger btn-sm"
-                   onclick="return confirm('Yakin hapus gambar ini?')">
+                   onclick="return confirm('Yakin ingin hapus gambar ini?')">
                     Hapus
                 </a>
             </td>
-
         </tr>
         @endforeach
     </tbody>
 </table>
+
 @endsection

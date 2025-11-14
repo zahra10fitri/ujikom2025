@@ -38,13 +38,14 @@ class UserController extends Controller
         'nama' => $request->nama,
         'kontak' => $request->kontak,
         'username' => $request->username,
-        'password' => Hash::make($request->password),
+        'password'  => Hash::make($request->password),
+
         'role' => $request->role,
     ]);
 
     return redirect()->route('admin.user')->with('success', 'User berhasil ditambahkan!');
 }
-    // EDIT (form edit user)    
+    // EDIT (form edit user)
 
 public function edit($id)
 {

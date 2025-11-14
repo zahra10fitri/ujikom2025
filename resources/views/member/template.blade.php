@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard Admin </title>
+    <title>Dashboard Member </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
@@ -41,11 +41,9 @@
 
 <div class="sidebar">
     <div class="logo">Marketplace</div>
-    <a href="{{ route('admin.dashboard') }}"><i class="fas fa-home me-2"></i> Dashboard</a>
-    <a href="{{ route('admin.user') }}"><i class="fas fa-store me-2"></i> User</a>
-    <a href="{{ route('admin.toko') }}"><i class="fas fa-store me-2"></i> Toko</a>
-    <a href="{{ route('admin.kategori') }}"><i class="fas fa-th-list me-2"></i> Kategori Produk</a>
-    <a href="{{ route('admin.produk') }}"><i class="fas fa-box-open me-2"></i> Produk</a>
+    <a href=""><i class="fas fa-home me-2"></i> Dashboard</a>
+    <a href=""><i class="fas fa-store me-2"></i> Toko</a>
+    <a href=""><i class="fas fa-box-open me-2"></i> Produk</a>
     {{-- <a href="{{ route('admin.gambar-produk') }}"><i class="fas fa-images me-2"></i> Gambar Produk</a> --}}
 </div>
 

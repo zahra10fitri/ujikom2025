@@ -6,18 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Toko extends Model
 {
-   
+
 
     protected $primaryKey = 'id_toko';
 
-    protected $fillable = [
-        'nama_toko',
-        'deskripsi',
-        'gambar',
-        'kontak_toko',
-        'alamat',
-        'id_user'
-    ];
+  protected $fillable = [
+    'nama_toko',
+    'deskripsi',
+    'gambar',
+    'kontak_toko',
+    'alamat',
+    'user_id',
+];
+
 
     // Toko dimiliki 1 user
     public function user()

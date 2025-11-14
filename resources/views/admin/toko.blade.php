@@ -31,10 +31,15 @@
                 <td>{{ $toko->deskripsi }}</td>
 
                 <td>
-                    @if($toko->gambar)
-                        <img src="{{ asset($toko->gambar) }}" width="70" alt="Gambar Toko">
+                    @php
+                        $gambarPath = $toko->gambar ? 'storage/' . $toko->gambar : 'images/default.png';
+                        $fileFullPath = storage_path('app/public/' . ($toko->gambar ?? ''));
+                    @endphp
+
+                    @if($toko->gambar && file_exists($fileFullPath))
+                        <img src="{{ asset($gambarPath) }}" alt="Gambar Toko" width="100">
                     @else
-                        <span class="text-danger">Belum ada</span>
+                        <img src="{{ asset('images/default.png') }}" alt="Tidak ada gambar" width="100">
                     @endif
                 </td>
 

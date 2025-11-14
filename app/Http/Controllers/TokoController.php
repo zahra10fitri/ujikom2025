@@ -42,13 +42,14 @@ class TokoController extends Controller
         }
 
         Toko::create([
-            'nama_toko' => $request->nama_toko,
-            'deskripsi' => $request->deskripsi,
-            'gambar' => $gambarPath,
-            'kontak_toko' => $request->kontak_toko,
-            'alamat' => $request->alamat,
-            'id_user' => $request->id_user,
-        ]);
+        'nama_toko' => $request->nama_toko,
+        'deskripsi' => $request->deskripsi,
+        'gambar' => $gambarPath,
+        'kontak_toko' => $request->kontak_toko,
+        'alamat' => $request->alamat,
+        'user_id' => $request->id_user, // <- harus sesuai nama kolom di DB
+    ]);
+
 
         return redirect()->route('admin.toko')->with('success', 'Toko berhasil ditambahkan');
     }

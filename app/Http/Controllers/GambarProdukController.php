@@ -46,29 +46,19 @@ class GambarProdukController extends Controller
         return view('admin.gambar-produk-edit', compact('data', 'produk'));
     }
 
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'id_produk' => 'required',
-            'nama_gambar' => 'image|max:2048'
-        ]);
+   public function update(Request $request, $id)
+{
+    $request->validate([
+        'id_produk' => 'required|exists:produks,id_produk',
+    ]);
 
-        $data = Gambar_produk::findOrFail($id);
-        $namaFile = $data->nama_gambar;
+    $gambar = Gambar_produk::findOrFail($id);
+    $gambar->id_produk = $request->id_produk;
+    $gambar->save();
 
-        if ($request->hasFile('nama_gambar')) {
-            $file = $request->file('nama_gambar');
-            $namaFile = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('gambar_produk'), $namaFile);
-        }
-
-        $data->update([
-            'id_produk' => $request->id_produk,
-            'nama_gambar' => $namaFile,
-        ]);
-
-        return redirect()->route('admin.gambar-produk')->with('success', 'Gambar berhasil diperbarui');
-    }
+    return redirect()->route('admin.gambar-produk.index')
+                     ->with('success', 'Gambar berhasil dipindahkan ke produk baru.');
+}
 
     public function destroy($id)
     {

@@ -41,36 +41,13 @@ class DatabaseSeeder extends Seeder
             'role' => 'member',
         ]);
 
-
-          Toko::create([
-            'nama_toko' => 'warung gaul',
-            'deskripsi' => 'warung gaul menjual makanan yang gaul dan kekinian.',
-            'gambar' => 'storage/images/toko1.jpg',
-            'kontak_toko' => '081234567890',
-            'alamat' => 'Samping koperasi sekolah',
-            'user_id' => 2,
+         User::create([
+            'nama' => 'ara',
+            'kontak' => '0812345678901',
+            'username' => 'ara',
+            'password' => bcrypt('123'),
+            'role' => 'member',
         ]);
 
-        Kategori::create(['nama_kategori' => 'makanan manis']);
-        Kategori::create(['nama_kategori' => 'Minuman']);
-        Kategori::create(['nama_kategori' => 'makanan pedas']);
-        Kategori::create(['nama_kategori' => 'snack']);
-        Kategori::create(['nama_kategori' => 'gorengan']);
-        Kategori::create(['nama_kategori' => 'roti']);
-
-           Produk::create([
-               'id_kategori' => 6,
-               'nama_produk' => 'Roti Coklat',
-               'harga' => 5000,
-               'stok' => 50,
-               'deskripsi' => 'Roti lembut isi coklat favorit anak sekolah.',
-               'tanggal_upload' => now(),
-               'id_toko' => 1,                       
-        ]);
-
-        Gambar_produk::create([
-            'id_produk' => 1,
-            'nama_gambar' => 'roti coklat',
-        ]);
     }
 }

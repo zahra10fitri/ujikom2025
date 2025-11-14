@@ -59,6 +59,20 @@
         font-weight: 700;
         letter-spacing: 1px;
     }
+
+.hover-shadow {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.hover-shadow:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+.card-body h6 {
+    font-size: 1rem;
+}
+.card-body p {
+    font-size: 0.875rem;
+}
 </style>
 </head>
 
@@ -92,20 +106,22 @@
                     <li class="nav-item"><a class="nav-link" href="#">Kategori</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Produk</a></li>
 
-                    <li class="nav-item">
-                        <a class="btn btn-warning ms-3 px-4 rounded-pill fw-bold" href="#">
-                            Login
-                        </a>
-                    </li>
                 </ul>
             </div>
 
         </div>
     </nav>
+</body>
+</html>
 
-    {{-- KONTEN --}}
-    @yield('content')
+{{-- KONTEN --}}
+@yield('content')
 
+{{-- SCRIPTS --}}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+{{-- Section untuk halaman yang membutuhkan JS tambahan --}}
+@yield('scripts')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>

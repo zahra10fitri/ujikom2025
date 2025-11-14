@@ -7,13 +7,13 @@
         <div class="hero-overlay"></div>
         <div class="hero-content">
         <h1 class="fw-bold" style="font-family:'Poppins', sans-serif; line-height:1.05; font-size:4rem;">
-            <span style="color:#27ae60;">Makanan</span> Lezat<br>
+            <span style="color:#27ae60;">Belanja  dengan mudah </span> 
             & Praktis<br>
-            <span style="color:white;">Di Sekolahmu</span>
+            <span style="color:white;">Untukmu</span>
         </h1>
 
             <p class="lead mt-3 fw-semibold" style="color: #34d376;">
-                "Nikmati kemudahan pesan makanan di sekolah dengan SmartKantin tanpa antre!"
+                "Nikmati kemudahan pesan makanan di dengan Smartkantin tanpa antre!"
             </p>
         </div>
     </div>
@@ -60,54 +60,65 @@
     </div>
 
 </section>
-
-
-
-<!-- BEST SELLING PRODUCTS -->
 <section class="container my-5">
-
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold" style="font-family:'Poppins', sans-serif;">Best Selling Products</h2>
-        <a href="#" class="btn btn-success">View All</a>
+        <h2 class="fw-bold" style="font-family:'Poppins', sans-serif;">Produk Terbaru</h2>
+        <a href="#" class="btn btn-success">Lihat Semua</a>
     </div>
 
-    <div class="row">
+    <div class="row g-4">
+        {{-- Produk 1 --}}
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="card border-0 shadow-sm rounded-3 hover-shadow">
+                <div class="position-relative">
+                    <img src="{{ asset('storage/images/donat.jpg') }}" class="card-img-top rounded-3" alt="Donat Gula">
+                </div>
+                <div class="card-body text-center">
+                    <h6 class="fw-bold mb-1">Donat Gula</h6>
+                    <p class="text-muted mb-0">Rp 5.000</p>
+                </div>
+            </div>
+        </div>
 
-        <div class="col-6 col-md-4 col-lg-3 mb-4">
-            <div class="card border-0 shadow-sm">
-                <img src="https://via.placeholder.com/400" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h6 class="fw-bold mb-1">Product Name</h6>
+        {{-- Produk 2 --}}
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="card border-0 shadow-sm rounded-3 hover-shadow">
+                <img src="{{ asset('storage/images/roti.jpg') }}" class="card-img-top rounded-3" alt="Roti Coklat">
+                <div class="card-body text-center">
+                    <h6 class="fw-bold mb-1">Roti Coklat</h6>
+                    <p class="text-muted mb-0">Rp 5.000</p>
+                </div>
+            </div>
+        </div>
+
+        {{-- Produk 3 --}}
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="card border-0 shadow-sm rounded-3 hover-shadow">
+                <img src="{{ asset('storage/images/nabati.jpg') }}" class="card-img-top rounded-3" alt="Nabati">
+                <div class="card-body text-center">
+                    <h6 class="fw-bold mb-1">Nabati</h6>
+                    <p class="text-muted mb-0">Rp 3.000</p>
+                </div>
+            </div>
+        </div>
+
+        {{-- Produk 4 --}}
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="card border-0 shadow-sm rounded-3 hover-shadow">
+                <img src="{{ asset('storage/images/makaroni.jpg') }}" class="card-img-top rounded-3" alt="Makaroni Pedas">
+                <div class="card-body text-center">
+                    <h6 class="fw-bold mb-1">Makaroni Pedas</h6>
                     <p class="text-muted mb-0">Rp 10.000</p>
                 </div>
             </div>
         </div>
 
-        <div class="col-6 col-md-4 col-lg-3 mb-4">
-            <div class="card border-0 shadow-sm">
-                <img src="https://via.placeholder.com/400" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h6 class="fw-bold mb-1">Product Name</h6>
-                    <p class="text-muted mb-0">Rp 10.000</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-4 col-lg-3 mb-4">
-            <div class="card border-0 shadow-sm">
-                <img src="https://via.placeholder.com/400" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h6 class="fw-bold mb-1">Product Name</h6>
-                    <p class="text-muted mb-0">Rp 10.000</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-4 col-lg-3 mb-4">
-            <div class="card border-0 shadow-sm">
-                <img src="https://via.placeholder.com/400" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h6 class="fw-bold mb-1">Product Name</h6>
+        {{-- Produk 5 --}}
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="card border-0 shadow-sm rounded-3 hover-shadow">
+                <img src="{{ asset('storage/images/matcha.jpeg') }}" class="card-img-top rounded-3" alt="Matcha">
+                <div class="card-body text-center">
+                    <h6 class="fw-bold mb-1">Matcha</h6>
                     <p class="text-muted mb-0">Rp 10.000</p>
                 </div>
             </div>

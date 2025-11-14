@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Produk extends Model
 {
     //
+      protected $table = 'produks';
+     protected $primaryKey = 'id_produk';
+
     protected $fillable = [
         'id_kategori',
         'id_toko',
@@ -30,7 +33,7 @@ class Produk extends Model
     }
 
     // produk punya banyak gambar
-    public function gambar()
+    public function gambarproduks()
     {
         return $this->hasMany(gambar_produk::class, 'id_produk', 'id_produk');
     }

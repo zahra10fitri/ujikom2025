@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Gambar_produk extends Model
 {
     //
+      protected $table = 'gambar_produks';
+     protected $primaryKey = 'id_gambar';
+
      protected $fillable = [
         'id_produk',
         'nama_gambar',
@@ -17,4 +20,5 @@ class Gambar_produk extends Model
     {
         return $this->belongsTo(Produk::class, 'id_produk', 'id_produk');
     }
+
 }
