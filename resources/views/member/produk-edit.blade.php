@@ -1,26 +1,36 @@
-@extends('member.template')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Produk</title>
 
-@section('content')
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body style="background:#f2f4f7">
+
 <div class="container mt-4">
     <h1 class="mb-4">Edit Produk</h1>
 
     <div class="card shadow-sm p-4">
-        <form action="{{ route('member.produk.update', $produk->id) }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
+       <form action="{{ route('member.produk.update', $produk->id_produk) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('POST') {{-- karena route update POST --}}
 
-            {{-- Nama Produk --}}
+            <!-- Nama Produk -->
             <div class="mb-3">
-                <label>Nama Produk</label>
+                <label class="form-label">Nama Produk</label>
                 <input type="text" name="nama_produk" class="form-control" value="{{ $produk->nama_produk }}" required>
             </div>
 
-            {{-- Kategori --}}
+            <!-- Kategori -->
             <div class="mb-3">
-                <label>Kategori</label>
+                <label class="form-label">Kategori</label>
                 <select name="id_kategori" class="form-control" required>
                     <option value="">-- Pilih Kategori --</option>
-                    @foreach ($kategoris as $kategori)
+                    @foreach ($kategori as $kategori)
                         <option value="{{ $kategori->id }}"
                             {{ $produk->id_kategori == $kategori->id ? 'selected' : '' }}>
                             {{ $kategori->nama_kategori }}
@@ -29,38 +39,38 @@
                 </select>
             </div>
 
-            {{-- Harga --}}
+            <!-- Harga -->
             <div class="mb-3">
-                <label>Harga</label>
+                <label class="form-label">Harga</label>
                 <input type="number" name="harga" class="form-control" value="{{ $produk->harga }}" required>
             </div>
 
-            {{-- Stok --}}
+            <!-- Stok -->
             <div class="mb-3">
-                <label>Stok</label>
+                <label class="form-label">Stok</label>
                 <input type="number" name="stok" class="form-control" value="{{ $produk->stok }}" required>
             </div>
 
-            {{-- Deskripsi --}}
+            <!-- Deskripsi -->
             <div class="mb-3">
-                <label>Deskripsi</label>
+                <label class="form-label">Deskripsi</label>
                 <textarea name="deskripsi" class="form-control" rows="3">{{ $produk->deskripsi }}</textarea>
             </div>
 
-            {{-- Gambar --}}
+            <!-- Upload Gambar Baru -->
             <div class="mb-3">
-                <label>Gambar Produk (Bisa upload multiple)</label>
+                <label class="form-label">Gambar Produk (bisa upload banyak)</label>
                 <input type="file" name="gambar_produk[]" class="form-control" multiple>
 
-                {{-- Preview gambar lama --}}
-                @if($produk->gambarproduks->count() > 0)
-                    <p class="mt-2 mb-1">Gambar Saat Ini:</p>
-                    <div class="d-flex flex-wrap gap-2">
-                        @foreach($produk->gambarproduks as $g)
-                            <img src="{{ asset('storage/'.$g->nama_gambar) }}" alt="Gambar Produk" width="120" class="rounded">
-                        @endforeach
-                    </div>
-                @endif
+                <!-- Gambar lama -->
+               @if($produk->gambarproduks && $produk->gambarproduks->count() > 0)
+                <p class="mt-3 mb-1 fw-bold">Gambar Saat Ini:</p>
+                <div class="d-flex flex-wrap gap-2">
+                    @foreach($produk->gambarproduks as $g)
+                        <img src="{{ asset('storage/'.$g->nama_gambar) }}" width="120" class="rounded shadow-sm">
+                    @endforeach
+                </div>
+              @endif
             </div>
 
             <button class="btn btn-primary">Update Produk</button>
@@ -68,4 +78,6 @@
         </form>
     </div>
 </div>
-@endsection
+
+</body>
+</html>

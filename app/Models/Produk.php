@@ -33,8 +33,9 @@ class Produk extends Model
     }
 
     // produk punya banyak gambar
-    public function gambarproduks()
+   public function gambar_produk()
     {
-        return $this->hasMany(gambar_produk::class, 'id_produk', 'id_produk');
+        return $this->hasMany(Gambar_produk::class, 'id_produk', 'id_produk');
     }
+
 }

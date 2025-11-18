@@ -39,9 +39,9 @@
 
                 {{-- Kolom Gambar --}}
                 <td>
-                @if ($p->gambarproduks->count() > 0)
+                @if ($p->gambar_produk->count() > 0)
                     <div class="d-flex flex-wrap gap-1 justify-content-center">
-                   @foreach ($p->gambarproduks as $g)
+                   @foreach ($p->gambar_produk as $g)
                     <img src="{{ asset('storage/' . $g->nama_gambar) }}" width="120" class="rounded mb-2">
                 @endforeach
 

@@ -9,10 +9,12 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-      protected $fillable = ['nama', 'kontak', 'username', 'password', 'role'];
+      protected $fillable = ['nama', 'kontak', 'username', 'password', 'role','status'];
 
-    public function tokos()
-    {
-        return $this->hasMany(Toko::class, 'user_id', 'id');
-    }
+public function toko()
+{
+    return $this->hasOne(Toko::class, 'user_id', 'id');
+}
+
+
 }

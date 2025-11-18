@@ -43,7 +43,7 @@
         <!-- Password -->
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" name="password" id="password" class="form-control" required>
+            <input type="text" name="password" id="password" class="form-control" required>
             @error('password')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
@@ -60,6 +60,9 @@
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
+
+        <!-- Status (otomatis) -->
+        <input type="hidden" name="status" value="{{ old('role') == 'admin' ? 'approved' : 'pending' }}">
 
         <button type="submit" class="btn btn-primary">Simpan User</button>
     </form>

@@ -8,6 +8,15 @@
         @csrf
 
         <div class="mb-3">
+            <label>User Pemilik</label>
+            <select name="id_user" class="form-control" required>
+                <option value="">Pilih User</option>
+                @foreach ($users as $user)
+                    <option value="{{ $user->id }}">{{ $user->nama }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-3">
             <label>Nama Toko</label>
             <input type="text" name="nama_toko" class="form-control" required>
         </div>
@@ -32,15 +41,6 @@
             <input type="text" name="alamat" class="form-control" required>
         </div>
 
-        <div class="mb-3">
-            <label>User Pemilik</label>
-            <select name="id_user" class="form-control" required>
-                <option value="">Pilih User</option>
-                @foreach ($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->nama }}</option>
-                @endforeach
-            </select>
-        </div>
 
         <button class="btn btn-success">Simpan</button>
         <a href="{{ route('admin.toko') }}" class="btn btn-secondary">Kembali</a>

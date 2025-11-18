@@ -44,23 +44,35 @@
         <!-- Password (optional) -->
         <div class="mb-3">
             <label for="password" class="form-label">Password <small>(kosongkan jika tidak ingin diganti)</small></label>
-            <input type="password" name="password" id="password" class="form-control" placeholder="Kosongkan jika tidak ingin diganti">
+            <input type="text" name="password" id="password" class="form-control" value="{{ old('password', $user->password) }}">
             @error('password')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
+
         <!-- Role -->
         <div class="mb-3">
             <label for="role" class="form-label">Role</label>
             <select name="role" id="role" class="form-select" required>
-                <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
-                <option value="member" {{ $user->role == 'member' ? 'selected' : '' }}>Member</option>
+                <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>Admin</option>
+                <option value="member" {{ old('role', $user->role) == 'member' ? 'selected' : '' }}>Member</option>
             </select>
             @error('role')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
 
+        <!-- Status -->
+        <div class="mb-3">
+            <label for="status" class="form-label">Status</label>
+            <select name="status" id="status" class="form-select" required>
+                <option value="pending" {{ old('status', $user->status) == 'pending' ? 'selected' : '' }}>Pending</option>
+                <option value="approved" {{ old('status', $user->status) == 'approved' ? 'selected' : '' }}>Approved</option>
+            </select>
+            @error('status')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
+        </div>
 
         <button type="submit" class="btn btn-primary">Update User</button>
     </form>

@@ -19,7 +19,8 @@
                 <th>Username</th>
                 <th>Password</th>
                 <th>Role</th>
-                <th width="200px">Aksi</th>
+                <th>Status</th>
+                <th width="250px">Aksi</th>
             </tr>
         </thead>
 
@@ -32,9 +33,16 @@
                 <td>{{ $user->username }}</td>
                 <td>{{ $user->password }}</td>
                 <td>{{ $user->role }}</td>
-
+                <td>{{ $user->status }}</td>
                 <td>
                     <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
+
+                    @if($user->role == 'member' && $user->status == 'pending')
+                    <form action="{{ route('admin.user.approve', $user->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        <button class="btn btn-success btn-sm">Approve</button>
+                    </form>
+                    @endif
 
                     <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST" class="d-inline"
                         onsubmit="return confirm('Hapus user ini?')">

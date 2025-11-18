@@ -9,13 +9,17 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    // Halaman login
+    // ======================
+    // HALAMAN LOGIN
+    // ======================
     public function index()
     {
         return view('login');
     }
 
-    // Proses login
+    // ======================
+    // PROSES LOGIN
+    // ======================
     public function login(Request $request)
     {
         $request->validate([
@@ -29,23 +33,31 @@ class LoginController extends Controller
 
             $user = Auth::user();
 
-            // Redirect berdasarkan role
+            // CEK STATUS
+            if ($user->status !== 'approved') {
+                Auth::logout();
+                return back()->with('error', 'Akun Anda belum disetujui admin.');
+            }
+
+            // CEK ROLE
             if ($user->role == 'admin') {
                 return redirect()->route('admin.dashboard');
             }
-            elseif ($user->role == 'member') {
+
+            if ($user->role == 'member') {
                 return redirect()->route('member.dashboard');
             }
-            else {
-                Auth::logout();
-                return back()->with('error', 'Role tidak dikenali.');
-            }
+
+            Auth::logout();
+            return back()->with('error', 'Role tidak dikenali.');
         }
 
         return back()->with('error', 'Username atau Password salah!');
     }
 
-    // Logout
+    // ======================
+    // LOGOUT
+    // ======================
     public function logout(Request $request)
     {
         Auth::logout();
@@ -55,13 +67,17 @@ class LoginController extends Controller
         return redirect('/login');
     }
 
-    // Halaman register
+    // ======================
+    // HALAMAN REGISTER
+    // ======================
     public function register()
     {
         return view('register');
     }
 
-    // Proses register
+    // ======================
+    // PROSES REGISTER
+    // ======================
     public function registerproses(Request $request)
     {
         $request->validate([
@@ -71,19 +87,19 @@ class LoginController extends Controller
             'password' => 'required|min:4',
         ]);
 
-        // buat user baru
-        $user = User::create([
+        // BUAT USER DENGAN STATUS PENDING
+        User::create([
             'nama'      => $request->nama,
             'kontak'    => $request->kontak,
             'username'  => $request->username,
             'password'  => Hash::make($request->password),
-            'role'      => 'member',  // default member
+            'role'      => 'member',
+            'status'    => 'pending', // WAJIB!
         ]);
 
-        // AUTO LOGIN setelah registrasi
-        Auth::login($user);
+        // TIDAK auto login
 
-        // Redirect ke dashboard member
-        return redirect()->route('member.dashboard')->with('success', 'Registrasi berhasil, selamat datang!');
+        return redirect()->route('login')
+            ->with('success', 'Registrasi berhasil! Tunggu persetujuan admin sebelum login.');
     }
 }

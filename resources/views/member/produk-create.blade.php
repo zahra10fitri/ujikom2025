@@ -1,15 +1,23 @@
-@extends('admin.template')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Produk</title>
 
-@section('content')
-<div class="container mt-4">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background:#f5f5f5">
+
+<div class="container mt-4 p-4 bg-white rounded shadow">
 
     <h3 class="mb-3">Tambah Produk</h3>
 
     {{-- Penting: enctype untuk upload file --}}
-    <form action="{{ route('admin.produk.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('member.produk.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
-        \
         {{-- Kategori --}}
         <div class="mb-3">
             <label class="form-label">Kategori</label>
@@ -73,11 +81,11 @@
         </div>
 
         <button class="btn btn-primary">Simpan</button>
-        <a href="{{ route('admin.produk') }}" class="btn btn-secondary">Kembali</a>
+        <a href="{{ route('member.produk.index') }}" class="btn btn-secondary">Kembali</a>
     </form>
+
 </div>
 
-{{-- Script preview gambar --}}
 <script>
     function previewImages(event) {
         const container = document.getElementById('preview-container');
@@ -101,4 +109,6 @@
         }
     }
 </script>
-@endsection
+
+</body>
+</html>

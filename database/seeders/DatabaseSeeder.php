@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'zahra',
             'password' => bcrypt('123'),
             'role' => 'admin',
+            'status' => 'approved',
         ]);
 
         User::create([
@@ -39,6 +40,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'tiara',
             'password' => bcrypt('123'),
             'role' => 'member',
+            'status' => 'approved',
         ]);
 
          User::create([
@@ -47,6 +49,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'ara',
             'password' => bcrypt('123'),
             'role' => 'member',
+            'status' => 'pending',
         ]);
 
     }

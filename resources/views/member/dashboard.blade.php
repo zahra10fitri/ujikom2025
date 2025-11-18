@@ -1,164 +1,148 @@
-@extends('member.template')
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Member</title>
 
-@section('content')
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body style="background:#f7f7f7;">
+
 <div class="container mt-4">
-    <h1 class="mb-4">Dashboard Member</h1>
 
-    {{-- CEK: Member belum punya toko --}}
-    @if (!$toko)
-        <div class="card shadow-sm p-4">
-            <h4>Buat Toko Kamu</h4>
-            <p class="text-muted">Isi data toko kamu agar bisa mulai menjual produk.</p>
+    <h2>Dashboard Member</h2>
 
-            <form action="{{ route('member.toko.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="mb-3">
-                    <label>Nama Toko</label>
-                    <input type="text" name="nama_toko" class="form-control" required>
-                </div>
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
 
-                <div class="mb-3">
-                    <label>Deskripsi</label>
-                    <textarea name="deskripsi" class="form-control" rows="3"></textarea>
-                </div>
+    {{-- Jika user punya toko --}}
+    @if(!empty($toko) && $toko->id_toko)
 
-                <div class="mb-3">
-                    <label>Upload Gambar</label>
-                    <input type="file" name="gambar" class="form-control">
-                </div>
+        <!-- INFO TOKO -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Info Toko Anda
 
-                <div class="mb-3">
-                    <label>Kontak Toko</label>
-                    <input type="text" name="kontak_toko" class="form-control" required>
-                </div>
-
-                <div class="mb-3">
-                    <label>Alamat</label>
-                    <input type="text" name="alamat" class="form-control" required>
-                </div>
-
-                <button class="btn btn-success">Simpan</button>
-            </form>
-        </div>
-
-    {{-- CEK: Member sudah punya toko --}}
-    @else
-        {{-- UPDATE TOKO --}}
-        <div class="card shadow-sm p-4 mb-4">
-            <h4>Data Toko Kamu</h4>
-            <p class="text-muted">Kamu bisa mengupdate data toko di bawah ini.</p>
-
-            <form action="{{ route('member.toko.update', $toko->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-
-                <div class="mb-3">
-                    <label>Nama Toko</label>
-                    <input type="text" name="nama_toko" class="form-control" value="{{ $toko->nama_toko }}" required>
-                </div>
-
-                <div class="mb-3">
-                    <label>Deskripsi</label>
-                    <textarea name="deskripsi" class="form-control" rows="3">{{ $toko->deskripsi }}</textarea>
-                </div>
-
-                <div class="mb-3">
-                    <label>Upload Gambar (opsional)</label>
-                    <input type="file" name="gambar" class="form-control">
-                    @if($toko->gambar)
-                        <img src="{{ asset('storage/'.$toko->gambar) }}" class="img-thumbnail mt-2" width="150">
-                    @endif
-                </div>
-
-                <div class="mb-3">
-                    <label>Kontak Toko</label>
-                    <input type="text" name="kontak_toko" class="form-control" value="{{ $toko->kontak_toko }}" required>
-                </div>
-
-                <div class="mb-3">
-                    <label>Alamat</label>
-                    <input type="text" name="alamat" class="form-control" value="{{ $toko->alamat }}" required>
-                </div>
-
-                <button class="btn btn-primary">Update Toko</button>
-            </form>
-        </div>
-
-        {{-- LIST PRODUK --}}
-        <div class="card shadow-sm">
-            <div class="card-header bg-success text-white">
-                Produk Kamu
+                <a href="{{ route('member.toko.edit', $toko->id_toko) }}"
+                   class="btn btn-sm btn-primary float-end">
+                    EDIT TOKO 
+                </a>
             </div>
 
             <div class="card-body">
-                <a href="{{ route('member.produk.create') }}" class="btn btn-success mb-3">Tambah Produk</a>
+                <p><strong>Nama Toko:</strong> {{ $toko->nama_toko }}</p>
+                <p><strong>Deskripsi:</strong> {{ $toko->deskripsi }}</p>
+                <p><strong>Kontak:</strong> {{ $toko->kontak_toko ?? '-' }}</p>
+                <p><strong>Alamat:</strong> {{ $toko->alamat }}</p>
 
-                @if ($produks->count() > 0)
-                <table class="table table-bordered table-hover text-center">
-                    <thead class="table-dark">
+                <p>
+                    <strong>Gambar:</strong><br>
+                    @if($toko->gambar)
+                        <img src="{{ asset('storage/' . $toko->gambar) }}" width="150">
+                    @else
+                        <span class="text-muted">Belum ada gambar</span>
+                    @endif
+                </p>
+            </div>
+        </div>
+
+        <!-- PRODUK TOKO -->
+        <div class="card">
+            <div class="card-header">
+                Produk Toko Anda
+
+                <a href="{{ route('member.produk.create') }}"
+                   class="btn btn-sm btn-success float-end">
+                    Tambah Produk
+                </a>
+            </div>
+
+            <div class="card-body">
+
+                @if($produks->isNotEmpty())
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
                         <tr>
                             <th>ID</th>
-                            <th>Kategori</th>
                             <th>Nama Produk</th>
+                            <th>kategori</th>
                             <th>Harga</th>
                             <th>Stok</th>
                             <th>Deskripsi</th>
                             <th>Gambar</th>
                             <th>Aksi</th>
                         </tr>
-                    </thead>
+                        </thead>
 
-                    <tbody>
-                        @foreach ($produks as $p)
-                        <tr>
-                            <td>{{ $p->id }}</td>
-                            <td>{{ $p->kategori->nama_kategori ?? '-' }}</td>
-                            <td>{{ $p->nama_produk }}</td>
-                            <td>Rp {{ number_format($p->harga, 0, ',', '.') }}</td>
-                            <td>{{ $p->stok }}</td>
-                            <td>{{ $p->deskripsi }}</td>
+                        <tbody>
+                        @foreach($produks as $produk)
+                            <tr>
+                                <td>{{ $produk->id_produk }}</td>
+                                <td>{{ $produk->nama_produk }}</td>
+                                   <td>{{ $produk->kategori ? $produk->kategori->nama_kategori : '-' }}</td>
+                                <td>{{ number_format($produk->harga, 0, ',', '.') }}</td>
+                                <td>{{ $produk->stok }}</td>
+                                <td>{{ $produk->deskripsi }}</td>
 
-                            <td>
-                                @if ($p->gambarproduks->count() > 0)
-                                    <div class="d-flex flex-wrap gap-1 justify-content-center">
-                                        @foreach ($p->gambarproduks as $g)
-                                            <img src="{{ asset('storage/' . $g->nama_gambar) }}"
-                                                 width="100"
-                                                 class="rounded mb-1">
-                                        @endforeach
-                                    </div>
-                                @else
-                                    <img src="{{ asset('images/default.png') }}"
-                                         width="80"
-                                         class="rounded">
-                                @endif
-                            </td>
+                                <td>
+                                    @php
+                                        $gambar = $produk->gambar_produk->first();
+                                    @endphp
 
-                            <td>
-                                <a href="{{ route('member.produk.edit', $p->id) }}"
-                                   class="btn btn-warning btn-sm mb-1">Edit</a>
+                                    @if($gambar)
+                                        <img src="{{ asset('storage/' . $gambar->nama_gambar) }}" width="50">
+                                    @else
+                                        <span class="text-muted">Tidak ada gambar</span>
+                                    @endif
+                                </td>
 
-                                <form action="{{ route('member.produk.destroy', $p->id) }}"
-                                      method="POST"
-                                      class="d-inline">
+                                <td>
+                                    <a href="{{ route('member.produk.edit', $produk->id_produk) }}"
+                                       class="btn btn-sm btn-primary">
+                                        Edit
+                                    </a>
+
+                                   <form action="{{ route('member.produk.delete', $produk->id_produk) }}"
+                                    method="POST"
+                                    class="d-inline"
+                                    onsubmit="return confirm('Hapus produk ini?')">
+
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Yakin ingin hapus produk ini?')">
-                                        Hapus
-                                    </button>
+
+                                    <button class="btn btn-sm btn-danger">Hapus</button>
                                 </form>
-                            </td>
-                        </tr>
+
+                                </td>
+                            </tr>
                         @endforeach
-                    </tbody>
-                </table>
+                        </tbody>
+
+                    </table>
+                </div>
 
                 @else
                     <p class="text-muted">Belum ada produk.</p>
                 @endif
             </div>
         </div>
+
+    @else
+        <div class="alert alert-info">
+            Anda belum memiliki toko.
+
+            <a href="{{ route('member.toko.create') }}" class="btn btn-sm btn-primary ms-2">
+                Buat Toko Baru
+            </a>
+        </div>
     @endif
+
 </div>
-@endsection
+
+</body>
+</html>

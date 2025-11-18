@@ -20,7 +20,7 @@ Route::get('/', [berandaController::class, 'index'])->name('beranda');
 
 Route::middleware('admin')->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-  
+
 });
 
 
@@ -65,10 +65,34 @@ Route::get('/produk/{id}', [ProdukController::class, 'show'])->name('produk.show
 
 //member
 Route::middleware('member')->group(function () {
-    Route::get('/member/dashboard', [MemberController::class, 'index'])
-        ->name('member.dashboard');
-});
+    // Dashboard
+    Route::get('/member/dashboard', [MemberController::class, 'index'])->name('member.dashboard');
 
+    // Toko member
+    Route::get('/member/toko/create', [MemberController::class, 'create'])->name('member.toko.create');
+     Route::get('/member/toko/create', [MemberController::class, 'createToko'])
+    ->name('member.toko.create');
+    Route::get('/member/produk', [MemberProdukController::class, 'index'])->name('member.produk');
+
+    // Form tambah produk
+    Route::get('/member/produk/create', [MemberProdukController::class, 'create'])->name('member.produk.create');
+
+    // Proses simpan produk
+    Route::post('/member/produk/store', [MemberProdukController::class, 'store'])->name('member.produk.store');
+    Route::post('/member/toko/create', [MemberController::class, 'storeToko'])->name('member.toko.store');
+
+    Route::get('/member/toko/{id}/edit', [MemberController::class, 'edit'])->name('member.toko.edit');
+    Route::put('/member/toko/{id}', [MemberController::class, 'update'])->name('member.toko.update');
+
+    Route::get('/member/produk', [MemberController::class, 'produkIndex'])->name('member.produk.index');
+    Route::get('/member/produk/create', [MemberController::class, 'createProduk'])->name('member.produk.create');
+    Route::post('/member/produk/store', [MemberController::class, 'storeProduk'])->name('member.produk.store');
+    Route::get('/member/toko/{id}/edit', [MemberController::class, 'editToko'])->name('member.toko.edit');
+    Route::post('/member/produk/update/{id}', [MemberController::class, 'updateProduk'])->name('member.produk.update');
+    Route::delete('/member/produk/delete/{id}', [MemberController::class, 'deleteProduk'])->name('member.produk.delete');
+
+
+});
 
 
 //login
@@ -78,3 +102,9 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 //register
  Route::get('/register', [LoginController::class, 'register'])->name('register');
  Route::post('/register/proses', [LoginController::class, 'registerproses'])->name('register.proses');
+
+// Menampilkan member pending
+Route::get('/admin/user/pending', [UserController::class, 'pending'])->name('admin.user.pending');
+
+// Approve member
+Route::post('/admin/user/{id}/approve', [UserController::class, 'approve'])->name('admin.user.approve');

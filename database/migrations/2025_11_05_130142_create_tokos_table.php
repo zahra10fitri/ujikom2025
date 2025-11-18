@@ -12,18 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tokos', function (Blueprint $table) {
-       $table->id('id_toko');
-
-            // Kolom user_id yang benar
+          $table->id('id_toko');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-
             $table->string('nama_toko');
             $table->text('deskripsi')->nullable();
             $table->string('gambar')->nullable();
             $table->string('kontak_toko');
             $table->string('alamat');
             $table->timestamps();
-        
+
     });
     }
 
