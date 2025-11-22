@@ -17,6 +17,16 @@ Route::get('/', function () {
     return view('beranda');
 });
 Route::get('/', [berandaController::class, 'index'])->name('beranda');
+// Route::get('/produk/{id}', [ProdukController::class, 'show'])->name('produk.show');
+Route::get('/produk', [berandaController::class, 'semuaProduk'])->name('produk');
+Route::get('/produk/detail/{id}', [BerandaController::class, 'detail'])->name('produk.detail');
+Route::get('/produk/favorite/{id}', [BerandaController::class, 'favorite'])->name('produk.favorite');
+// Halaman daftar toko
+Route::get('/toko', [berandaController::class, 'indextoko'])->name('toko');
+// Halaman detail toko
+Route::get('/toko/{id}', [berandaController::class, 'detailtoko'])->name('toko.detail');
+
+
 
 Route::middleware('admin')->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
@@ -61,7 +71,6 @@ Route::get('/admin/gambar-produk/{id}/edit', [GambarProdukController::class, 'ed
 Route::post('/admin/gambar-produk/{id}/update', [GambarProdukController::class, 'update'])->name('admin.gambar-produk.update');
 Route::get('/admin/gambar-produk/{id}/delete', [GambarProdukController::class, 'destroy'])->name('admin.gambar-produk.delete');
 
-Route::get('/produk/{id}', [ProdukController::class, 'show'])->name('produk.show');
 
 //member
 Route::middleware('member')->group(function () {
@@ -72,22 +81,19 @@ Route::middleware('member')->group(function () {
     Route::get('/member/toko/create', [MemberController::class, 'create'])->name('member.toko.create');
      Route::get('/member/toko/create', [MemberController::class, 'createToko'])
     ->name('member.toko.create');
-    Route::get('/member/produk', [MemberProdukController::class, 'index'])->name('member.produk');
-
-    // Form tambah produk
-    Route::get('/member/produk/create', [MemberProdukController::class, 'create'])->name('member.produk.create');
-
-    // Proses simpan produk
     Route::post('/member/produk/store', [MemberProdukController::class, 'store'])->name('member.produk.store');
     Route::post('/member/toko/create', [MemberController::class, 'storeToko'])->name('member.toko.store');
 
     Route::get('/member/toko/{id}/edit', [MemberController::class, 'edit'])->name('member.toko.edit');
     Route::put('/member/toko/{id}', [MemberController::class, 'update'])->name('member.toko.update');
+    Route::get('/member/toko/{id}/edit', [MemberController::class, 'editToko'])->name('member.toko.edit');
+    Route::put('/member/toko/{id}', [MemberController::class, 'updateToko'])->name('member.toko.update');
+    // Proses simpan produk
 
     Route::get('/member/produk', [MemberController::class, 'produkIndex'])->name('member.produk.index');
     Route::get('/member/produk/create', [MemberController::class, 'createProduk'])->name('member.produk.create');
     Route::post('/member/produk/store', [MemberController::class, 'storeProduk'])->name('member.produk.store');
-    Route::get('/member/toko/{id}/edit', [MemberController::class, 'editToko'])->name('member.toko.edit');
+    Route::get('/member/produk/edit/{id}', [MemberController::class, 'editProduk'])->name('member.produk.edit');
     Route::post('/member/produk/update/{id}', [MemberController::class, 'updateProduk'])->name('member.produk.update');
     Route::delete('/member/produk/delete/{id}', [MemberController::class, 'deleteProduk'])->name('member.produk.delete');
 

@@ -14,9 +14,9 @@
 
     <div class="card p-4 shadow-sm">
         
-    <form action="{{ route('member.toko.update', $toko->id) }}" method="POST">
-        @csrf
-        @method('PUT')
+ <form action="{{ route('member.toko.update', $toko->id_toko) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
 
             <div class="mb-3">
                 <label class="form-label">Nama Toko</label>

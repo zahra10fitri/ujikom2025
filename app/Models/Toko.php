@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Toko extends Model
 {
-
-
     protected $primaryKey = 'id_toko';
 
   protected $fillable = [
@@ -31,4 +29,4 @@ class Toko extends Model
     {
         return $this->hasMany(Produk::class, 'id_toko', 'id_toko');
     }
-}
+} 

@@ -77,8 +77,8 @@
 
             {{-- Gambar Lama --}}
            <div class="mt-3 d-flex flex-wrap gap-2">
-                @foreach ($produk->gambarproduks as $g)
-                    <img src="{{ asset('storage/produk/' . $g->nama_gambar) }}" 
+                @foreach ($produk->gambar_produk as $g)
+                    <img src="{{ asset('storage/' . $g->nama_gambar) }}"
                         width="120" height="120"
                         class="rounded shadow-sm object-fit-cover"
                         alt="{{ $produk->nama_produk }}">

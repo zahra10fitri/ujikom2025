@@ -30,7 +30,7 @@
         <tbody>
             @foreach ($produks as $p)
             <tr>
-                <td>{{ $p->id_produk }}</td>
+                <td>{{ $loop->iteration }}</td>
                 <td>{{ $p->kategori->nama_kategori ?? '-' }}</td>
                 <td>{{ $p->nama_produk }}</td>
                 <td>Rp {{ number_format($p->harga, 0, ',', '.') }}</td>

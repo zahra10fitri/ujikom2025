@@ -192,6 +192,8 @@
     <a href="{{ route('admin.toko') }}"><i class="fas fa-store"></i> Manajemen Toko</a>
     <a href="{{ route('admin.kategori') }}"><i class="fas fa-th-list"></i> Manajemen Kategori Produk</a>
     <a href="{{ route('admin.produk') }}"><i class="fas fa-box-open"></i> Manajemen Produk</a>
+    <a href="{{ route('beranda') }}"><i class="fas fa-logout"></i> Logout</a>
+
     {{-- <a href="{{ route('admin.gambar-produk') }}"><i class="fas fa-images"></i> Manajemen Gambar Produk</a> --}}
 </div>
 

@@ -99,7 +99,7 @@ public function update(Request $request, $id_produk)
     if ($request->hasFile('gambar_produk')) {
         foreach ($request->file('gambar_produk') as $file) {
             $filename = $file->store('produk', 'public');
-            $produk->gambarProduks()->create([
+            $produk->gambar_produk()->create([
                 'nama_gambar' => $filename
             ]);
         }

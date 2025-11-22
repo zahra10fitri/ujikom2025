@@ -1,47 +1,37 @@
 @extends('template')
 
+@section('title', 'Daftar Toko')
+
 @section('content')
-<div class="container mt-4">
-    <h3 class="mb-3">Data Toko</h3>
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
 
-    <table class="table table-bordered table-striped">
-        <thead class="table-dark">
-            <tr>
-                <th>ID</th>
-                <th>Nama Toko</th>
-                <th>Deskripsi</th>
-                <th>Gambar</th>
-                <th>Kontak</th>
-                <th>Alamat</th>
-                <th>ID User</th>
-               
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($tokos as $toko)
-            <tr>
-                <td>{{ $toko->id_toko }}</td>
-                <td>{{ $toko->nama_toko }}</td>
-                <td>{{ $toko->deskripsi }}</td>
+<div class="container py-5">
+    <h2 class="fw-bold mb-4">Daftar Toko</h2>
 
-                <td>
-                    @if($toko->gambar)
-                        <img src="{{ asset($toko->gambar) }}" width="70" alt="Gambar Toko">
-                    @else
-                        <span class="text-danger">Belum ada</span>
-                    @endif
-                </td>
+    <div class="row g-4">
 
-                <td>{{ $toko->kontak_toko }}</td>
-                <td>{{ $toko->alamat }}</td>
-                <td>{{ $toko->user_id }}</td>
+        @forelse ($toko as $t)
+            <div class="col-6 col-md-4 col-lg-3">
+                <a href="{{ route('toko.detail', $t->id) }}" class="text-decoration-none">
+                    <div class="card shadow-sm border-0 rounded-3 p-3 text-center">
 
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+                        {{-- Foto / Logo Toko --}}
+                        <img src="{{ asset('storage/' . $t->foto_toko) }}"
+                             class="rounded-circle mb-3"
+                             style="width:90px; height:90px; object-fit:cover;">
+
+                        <h5 class="fw-bold text-dark">{{ $t->nama_toko }}</h5>
+
+                        <p class="text-muted small">
+                            {{ Str::limit($t->deskripsi, 50) }}
+                        </p>
+                    </div>
+                </a>
+            </div>
+        @empty
+            <p class="text-muted">Belum ada toko.</p>
+        @endforelse
+
+    </div>
 </div>
+
 @endsection
